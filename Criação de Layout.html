@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt_br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        #menu {
+            width: 200px;
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        #menu img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 50%;
+        }
+
+        #main-content {
+            flex: 1;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            display: block;
+            padding: 10px;
+            background-color: #555;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        a:hover {
+            background-color: #777;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .task-list {
+            margin-top: 10px;
+        }
+
+        .add-task {
+            margin-top: 10px;
+        }
+
+        input[type="text"] {
+            padding: 5px;
+            margin-right: 5px;
+        }
+
+        input[type="submit"] {
+            padding: 5px 10px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .remove-task {
+            cursor: pointer;
+            color: red;
+            margin-left: 5px;
+        }
+    </style>
+    <title>Layout Personalizado</title>
+</head>
+
+<body>
+
+    <div id="menu">
+        <img src="icone.png" alt="Ícone">
+        <p>Nome Genérico</p>
+        <ul>
+            <li><a href="#">Link1</a></li>
+            <li><a href="#">Link2</a></li>
+            <li><a href="#">Link3</a></li>
+            <li><a href="#">Link4</a></li>
+        </ul>
+    </div>
+
+    <div id="main-content">
+        <h1>Lista de Tarefas</h1>
+
+        <div class="task-list">
+            <h2>Dia</h2>
+            <table>
+                <tr>
+                    <th>Tarefa</th>
+                    <th>Remover</th>
+                </tr>
+                <!-- Tarefas dinâmicas aqui -->
+            </table>
+        </div>
+
+        <div class="task-list">
+            <h2>Noite</h2>
+            <table>
+                <tr>
+                    <th>Tarefa</th>
+                    <th>Remover</th>
+                </tr>
+                <!-- Tarefas dinâmicas aqui -->
+            </table>
+        </div>
+
+        <div class="add-task">
+            <input type="text" id="newTask" placeholder="Nova Tarefa">
+            <input type="submit" value="Adicionar" onclick="addTask()">
+        </div>
+    </div>
+
+    <script>
+        function addTask() {
+            var newTask = document.getElementById("newTask").value;
+            if (newTask !== "") {
+                var table = document.createElement("table");
+                var row = table.insertRow(0);
+                var cell1 = row.insertCell(0);
+                var cell2 = row.insertCell(1);
+                cell1.innerHTML = newTask;
+                cell2.innerHTML = '<span class="remove-task" onclick="removeTask(this)">X</span>';
+                document.querySelector(".task-list").appendChild(table);
+                document.getElementById("newTask").value = "";
+            }
+        }
+
+        function removeTask(element) {
+            element.parentNode.parentNode.parentNode.removeChild(element.parentNode.parentNode);
+        }
+    </script>
+
+</body>
+
+</html>
